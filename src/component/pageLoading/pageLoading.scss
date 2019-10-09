@@ -1,0 +1,29 @@
+@import "@/assets/style/config.scss";
+
+.jyc-loading {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.25);
+  z-index: 9999;
+  font-size: $font-size-md;
+  font-weight: bold;
+  color: $white;
+  transition: all .3s;
+  .loading-j{
+    width: 70px;
+    height: 70px;
+    border-radius: 50px;
+    margin-bottom: $margin-sm;
+  }
+  > div{
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    display: flex;
+    justify-content:center;
+    align-items:Center;
+  }
+}

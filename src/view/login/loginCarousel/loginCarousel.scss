@@ -1,0 +1,26 @@
+.login{
+  &-bg{
+    &__item{
+      width: 100%;
+      height: inherit;
+      -webkit-filter: grayscale(60%); /* Chrome, Safari, Opera */
+      filter: grayscale(60%);
+      &.item-one{
+        background: url("../../../assets/image/bg3.jpg") no-repeat 0 0;
+        background-size: cover;
+      }
+      &.item-two{
+        background: url("../../../assets/image/bg2.jpg") no-repeat 0 0;
+        background-size: cover;
+      }
+      &.item-three{
+        background: url("../../../assets/image/bg.jpg") no-repeat 0 0;
+        background-size: cover;
+      }
+      &.item-four{
+        background: url("../../../assets/image/bg4.jpg") no-repeat 0 0;
+        background-size: cover;
+      }
+    }
+  }
+}

@@ -1,0 +1,157 @@
+@import "config";
+
+.m {
+  &-t {
+    &-xs {
+      margin-top: $margin-xs;
+    }
+  }
+  &-b {
+    &-xs {
+      margin-bottom: $margin-xs;
+    }
+    &-sm {
+      margin-bottom: $margin-sm;
+    }
+    &-md {
+      margin-bottom: $margin-md;
+    }
+    &-n {
+      margin-bottom: 0;
+    }
+  }
+  &-r {
+    &-xs {
+      margin-right: $margin-xs;
+    }
+    &-md {
+      margin-right: $margin-md;
+    }
+  }
+  &-l {
+    &-md {
+      margin-left: $margin-md;
+    }
+  }
+}
+
+.no-radius {
+  border-radius: $border-radius-no !important;
+}
+
+.fr {
+  float: right;
+}
+
+.tr {
+  text-align: right;
+}
+
+.tl {
+  text-align: left;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.error {
+  color: $red;
+}
+
+.link {
+  color: $primary-color;
+  cursor: pointer;
+}
+
+.list-long {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  word-wraprap: break-word;
+  word-break: break-all;
+}
+
+.list-base {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  word-wraprap: break-word;
+  word-break: break-all;
+}
+
+.icon-info {
+  font-size: 12px;
+  color: #faad14 !important;
+}
+
+// 样式覆盖
+.ant-form-inline .ant-form-item {
+  margin-bottom: 17px !important;
+}
+
+.ant-form-inline .ant-form-item-with-help {
+  margin-bottom: 0 !important;
+}
+
+.ant-select-selection--multiple .ant-select-selection__choice__content {
+  width: 53px !important;
+}
+
+.ant-popover-message > .anticon {
+  top: 6px !important;
+}
+
+.ant-table-tbody > tr > td {
+  word-wrap: break-word;
+  word-break: break-all;
+}
+
+.ant-pagination-options-size-changer.ant-select {
+  margin-right: 0!important;
+}
+
+.ant-collapse > .ant-collapse-item > .ant-collapse-header {
+  background: #f2f7f7;
+}
+
+.preview-icon {
+  width: 35px;
+  height: 45px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  margin: 5px auto 0 auto;
+}
+
+.icon.icon-excel {
+  background-image: url("../../assets/image/icon-excel.png");
+}
+.icon.icon-image {
+  background-image: url("../../assets/image/icon-image.png");
+}
+.icon.icon-pdf {
+  background-image: url("../../assets/image/icon-pdf.png");
+}
+.icon.icon-text {
+  background-image: url("../../assets/image/icon-text.png");
+}
+.icon.icon-- {
+  background-image: url("../../assets/image/icon-undefined.png");
+}
+.icon.icon-word {
+  background-image: url("../../assets/image/icon-word.png");
+}
+
+.download {
+  color: $primary-color;
+}
+
+// react-images__view兼容
+.react-images__view {
+  display: flex!important;
+}

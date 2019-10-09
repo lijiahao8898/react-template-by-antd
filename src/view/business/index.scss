@@ -1,0 +1,24 @@
+@import "@/assets/style/config.scss";
+
+.header {
+  background: $white;
+  padding: $no-padding $padding-sm;
+  height: 44px;
+}
+
+.content {
+  padding: $padding-xs;
+  background: #eee;
+}
+
+.trigger {
+  font-size: $font-size-hg;
+  line-height: 44px;
+  padding: $no-padding $padding-sm;
+  cursor: pointer;
+  transition: color .3s;
+}
+
+.trigger:hover {
+  color: $primary-color;
+}

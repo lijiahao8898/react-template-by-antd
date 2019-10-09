@@ -1,0 +1,216 @@
+.
+├── Dockerfile
+├── Jenkinsfile
+├── README.md
+├── config
+│   ├── env.js
+│   ├── jest
+│   │   ├── cssTransform.js
+│   │   └── fileTransform.js
+│   ├── modifyVars.js
+│   ├── paths.js
+│   ├── polyfills.js
+│   ├── webpack.config.dev.js
+│   ├── webpack.config.prod.js
+│   └── webpackDevServer.config.js
+├── package.json
+├── public
+│   ├── _favicon.ico
+│   ├── favicon.ico
+│   ├── index.html
+│   └── manifest.json
+├── scripts
+│   ├── build.js
+│   ├── start.js
+│   └── test.js
+├── src
+│   ├── App.js
+│   ├── App.test.js
+│   ├── api
+│   │   ├── apiList
+│   │   │   ├── account.js
+│   │   │   ├── case.js
+│   │   │   ├── collection.js
+│   │   │   └── common.js
+│   │   ├── config.js
+│   │   ├── index.js
+│   │   └── mock
+│   │       ├── index.js
+│   │       └── mockServer.js
+│   ├── assets
+│   │   ├── image
+│   │   │   ├── _logo.png
+│   │   │   ├── bg.jpg
+│   │   │   ├── bg2.jpg
+│   │   │   ├── bg3.jpg
+│   │   │   ├── bg4.jpg
+│   │   │   ├── headimg.png
+│   │   │   ├── icon-excel.png
+│   │   │   ├── icon-image.png
+│   │   │   ├── icon-pdf.png
+│   │   │   ├── icon-text.png
+│   │   │   ├── icon-undefined.png
+│   │   │   ├── icon-word.png
+│   │   │   ├── loading-j.gif
+│   │   │   └── logo.png
+│   │   ├── js
+│   │   │   ├── common.js
+│   │   │   └── config.js
+│   │   ├── map
+│   │   │   └── index.js
+│   │   └── style
+│   │       ├── config.scss
+│   │       └── main.scss
+│   ├── component
+│   │   ├── header
+│   │   │   ├── header.jsx
+│   │   │   └── header.scss
+│   │   ├── jycCard
+│   │   │   └── jycCard.jsx
+│   │   ├── jycInput
+│   │   │   └── index.js
+│   │   ├── listItem
+│   │   │   ├── listItem.jsx
+│   │   │   └── listItem.scss
+│   │   ├── pageLoading
+│   │   │   ├── pageLoading.jsx
+│   │   │   └── pageLoading.scss
+│   │   ├── previewImage
+│   │   │   ├── index.js
+│   │   │   └── index.scss
+│   │   ├── search
+│   │   │   ├── search.jsx
+│   │   │   └── search.scss
+│   │   ├── sidebar
+│   │   │   ├── sidebar.jsx
+│   │   │   └── sidebar.scss
+│   │   ├── tablePage
+│   │   │   └── tablePage.jsx
+│   │   ├── trackRecordModal
+│   │   │   ├── trackRecordModal.js
+│   │   │   └── trackRecordModalNew.js
+│   │   └── withholdModal
+│   │       ├── withholdModal.jsx
+│   │       └── withholdModal.scss
+│   ├── index.js
+│   ├── registerServiceWorker.js
+│   ├── store
+│   │   ├── action.js
+│   │   ├── config
+│   │   │   ├── action-type.js
+│   │   │   ├── action.js
+│   │   │   └── reducer.js
+│   │   ├── index.js
+│   │   ├── menu
+│   │   │   ├── action-type.js
+│   │   │   ├── action.js
+│   │   │   └── reducer.js
+│   │   └── statusCode
+│   │       ├── action-type.js
+│   │       ├── action.js
+│   │       └── reducer.js
+│   └── view
+│       ├── business
+│       │   ├── AccountManagement
+│       │   │   ├── account
+│       │   │   │   ├── autoDetectionModal.js
+│       │   │   │   ├── detail
+│       │   │   │   │   ├── addContactsModal.jsx
+│       │   │   │   │   ├── addressBook.jsx
+│       │   │   │   │   ├── bankList.js
+│       │   │   │   │   ├── baseInfo.jsx
+│       │   │   │   │   ├── detail.scss
+│       │   │   │   │   ├── detailAssetsList.jsx
+│       │   │   │   │   ├── detailContactPeople.jsx
+│       │   │   │   │   ├── index.jsx
+│       │   │   │   │   ├── modal
+│       │   │   │   │   │   └── addBankModal.js
+│       │   │   │   │   └── trackList.js
+│       │   │   │   ├── entry.js
+│       │   │   │   ├── index.js
+│       │   │   │   ├── modal
+│       │   │   │   │   └── separateModal.js
+│       │   │   │   └── myAccount.js
+│       │   │   ├── account_old
+│       │   │   │   ├── autoDetectionModal.js
+│       │   │   │   ├── detail
+│       │   │   │   │   ├── addContactsModal.jsx
+│       │   │   │   │   ├── detailAssetsList.jsx
+│       │   │   │   │   ├── detailBaseInfo.jsx
+│       │   │   │   │   ├── detailContactPeople.jsx
+│       │   │   │   │   ├── detailContactWay.jsx
+│       │   │   │   │   ├── detailTrackList.js
+│       │   │   │   │   └── index.jsx
+│       │   │   │   └── index.jsx
+│       │   │   ├── case
+│       │   │   │   ├── detail
+│       │   │   │   │   ├── ReminderSlip.js
+│       │   │   │   │   ├── case.jsx
+│       │   │   │   │   ├── claims.js
+│       │   │   │   │   ├── claimsFiles.js
+│       │   │   │   │   ├── imagesPreview.js
+│       │   │   │   │   ├── index.jsx
+│       │   │   │   │   └── repaymentVoucherModal.js
+│       │   │   │   ├── entry.js
+│       │   │   │   ├── index.js
+│       │   │   │   ├── modal
+│       │   │   │   │   ├── appointCaseModal.js
+│       │   │   │   │   ├── editHistoryModal.js
+│       │   │   │   │   ├── editModal.js
+│       │   │   │   │   ├── importHistoryModal.js
+│       │   │   │   │   ├── importModal.js
+│       │   │   │   │   ├── modalBatchSendMessage.jsx
+│       │   │   │   │   ├── penaltyAmountModal.jsx
+│       │   │   │   │   ├── separateModal.js
+│       │   │   │   │   └── withholdModal.js
+│       │   │   │   └── myCase.js
+│       │   │   ├── case_old
+│       │   │   │   ├── detail
+│       │   │   │   │   ├── detail.jsx
+│       │   │   │   │   ├── detailBaseInfo.jsx
+│       │   │   │   │   ├── imagesPreview.js
+│       │   │   │   │   └── repaymentVoucherModal.js
+│       │   │   │   ├── index.jsx
+│       │   │   │   ├── modalBatchSendMessage.jsx
+│       │   │   │   └── penaltyAmountModal.jsx
+│       │   │   ├── overduePlan
+│       │   │   │   ├── index.jsx
+│       │   │   │   └── uploadModal.js
+│       │   │   └── trackList
+│       │   │       └── index.js
+│       │   ├── collectionTool
+│       │   │   ├── autoDetection
+│       │   │   │   ├── addModal
+│       │   │   │   │   ├── addModal.js
+│       │   │   │   │   └── addModal.scss
+│       │   │   │   └── index.jsx
+│       │   │   ├── collectionPeople
+│       │   │   │   ├── index.js
+│       │   │   │   └── peopleModal.js
+│       │   │   └── messageManagement
+│       │   │       ├── autoTask
+│       │   │       │   ├── addModal.jsx
+│       │   │       │   └── index.jsx
+│       │   │       ├── index.js
+│       │   │       ├── sendLog
+│       │   │       │   ├── index.jsx
+│       │   │       │   └── modalSendLogDetail.jsx
+│       │   │       └── template
+│       │   │           ├── addModal.jsx
+│       │   │           └── index.jsx
+│       │   ├── home
+│       │   │   └── home.jsx
+│       │   ├── index.jsx
+│       │   └── index.scss
+│       ├── login
+│       │   ├── login.jsx
+│       │   ├── login.scss
+│       │   └── loginCarousel
+│       │       ├── loginCarousel.jsx
+│       │       └── loginCarousel.scss
+│       └── resetPwd
+│           ├── resetPwd.jsx
+│           └── resetPwd.scss
+└── tree.text
+
+57 directories, 156 files

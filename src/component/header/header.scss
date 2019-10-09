@@ -1,0 +1,23 @@
+.header{
+  height: 44px;
+  .user{
+    display: inline-block;
+    &-icon{
+      background: url("../../assets/image/headimg.png") no-repeat 0 0;
+      background-size: contain;
+      width: 36px;
+      height: 36px;
+      margin-top: 5px;
+      border-radius: 100%;
+      display: inline-block;
+    }
+  }
+  &-dropdown{
+    height: 36px;
+    line-height: 44px;
+    display: inline-block;
+    margin-top: 4px;
+    padding: 0 10px 0 15px;
+    text-align: left;
+  }
+}

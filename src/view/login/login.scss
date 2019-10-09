@@ -1,0 +1,70 @@
+@import "@/assets/style/config.scss";
+
+.login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &-bg{
+    width: 100%;
+    height: inherit;
+    position: absolute;
+    z-index: -1;
+  }
+  &-title{
+    text-align: center;
+    margin-bottom: 35px;
+    color: $white;
+    font-size: 48px;
+    opacity: .8;
+    transition: .3s;
+    position: relative;
+    margin-left: 60px;
+    &:before{
+      content: '';
+      position: absolute;
+      left: -25px;
+      top: 12px;
+      width: 50px;
+      height: 49px;
+      background: url("../../assets/image/logo.png") no-repeat 0 0;
+      background-size: cover;
+    }
+  }
+  &-wrapper{
+    &:hover{
+      .login-title{
+        opacity: .8;
+        text-shadow: 2px 2px 0 $primary-color, 7px 5px 0 rgba(0,0,0,0.3);
+      }
+    }
+  }
+  &-form {
+    text-align: left;
+    width: 330px;
+    height: 360px;
+    position: relative;
+    background: $white;
+    padding: $padding-lg;
+    margin: 0 auto;
+    border-radius: $border-radius-base;
+    .verify-code {
+      height: 34px;
+    }
+    &__container {
+      margin-top: 40px;
+    }
+    &__button {
+      width: 100%;
+      background: $primary-color;
+      border: none;
+      color: $white;
+      font-size: $font-size-lg;
+      border-radius: $border-radius-base;
+      height: 40px;
+      line-height: 40px;
+      cursor: pointer;
+      outline: none;
+      bottom: -120px;
+    }
+  }
+}

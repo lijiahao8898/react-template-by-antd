@@ -1,0 +1,60 @@
+@import "@/assets/style/config.scss";
+
+.reset-password {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &-bg{
+    width: 100%;
+    height: inherit;
+    position: absolute;
+    z-index: -1;
+  }
+  &-title{
+    text-align: center;
+    margin-bottom: 35px;
+    color: $white;
+    font-size: 48px;
+    transition: .3s;
+    position: relative;
+    opacity: .8;
+    text-shadow: 2px 2px 0 $primary-color, 7px 5px 0 rgba(0,0,0,0.3);
+  }
+  &-wrapper{
+  }
+  &-form {
+    text-align: left;
+    width: 340px;
+    height: 390px;
+    position: relative;
+    background: $white;
+    padding: $padding-lg;
+    margin: 0 auto;
+    border-radius: $border-radius-base;
+    .verify-code {
+      height: 34px;
+    }
+    &__container {
+      margin-top: 40px;
+    }
+    &__button {
+      width: 100%;
+      border: none;
+      font-size: $font-size-lg;
+      border-radius: $border-radius-base;
+      height: 40px;
+      line-height: 40px;
+      cursor: pointer;
+      outline: none;
+      bottom: -35px;
+      &.submit {
+        background: $primary-color;
+        color: $white;
+      }
+      &.reset {
+        bottom: -45px;
+        background: $gary;
+      }
+    }
+  }
+}

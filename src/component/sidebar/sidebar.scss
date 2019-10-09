@@ -1,0 +1,76 @@
+@import "@/assets/style/config.scss";
+.sidebar{
+  box-shadow: 2px 0 6px rgba(0, 21, 41, 0.35);
+  &-wrapper{
+    position: relative;
+    height: $sidebar-height;
+    padding-left: 24px;
+    overflow: hidden;
+    line-height: $sidebar-height;
+    background: $sidebar-background;
+    transition: all .3s;
+    .logo{
+      background: url("../../assets/image/logo.png") no-repeat left center;
+      background-size: 32px;
+      float: left;
+      width: 32px;
+      &.collapsed {
+        background: url("../../assets/image/logo.png") no-repeat left center;
+        background-size: 32px;
+        float: left;
+        width: 100%;
+      }
+    }
+    .system-name{
+      display: inline-block;
+      margin: 0 0 0 12px;
+      color: #fff;
+      font-weight: 600;
+      font-size: $font-size-hg;
+      font-family: $sidebar-font-family;
+      vertical-align: middle;
+      &.collapsed {
+        display: none;
+        font-size: 0;
+      }
+    }
+  }
+  &-userinfo{
+    color: $white;
+    font-size: $font-size-base;
+    font-family: $sidebar-font-family;
+    vertical-align: middle;
+    height: $sidebar-height;
+    line-height: $sidebar-height;
+    background: $sidebar-background;
+    text-align: center;
+    &.collapsed {
+      display: none;
+      font-size: 0;
+    }
+  }
+  &-logout{
+    color: $white;
+    font-size: $font-size-base;
+    font-family: $sidebar-font-family;
+    vertical-align: middle;
+    height: $sidebar-height;
+    line-height: $sidebar-height;
+    padding-left: 24px;
+    background: $sidebar-background;
+    &.collapsed {
+      display: none;
+      font-size: 0;
+    }
+  }
+}
+.ant-menu{
+  .ant-menu-submenu-title{
+    text-align: left;
+  }
+  ul{
+    li{
+      text-align: left;
+    }
+  }
+}

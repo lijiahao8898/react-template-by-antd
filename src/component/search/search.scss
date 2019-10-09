@@ -1,0 +1,65 @@
+$fontSize: 12px;
+.search {
+  overflow: hidden;
+  position: relative;
+  min-height: 70px;
+  padding: 5px;
+
+  .space-mark {
+    width: 10px;
+    display: inline-block;
+    text-align: center;
+    height: 34px;
+    line-height: 34px;
+  }
+
+  &-area {
+    margin-right: 75px;
+
+    .ant {
+      &-form {
+        label {
+          font-size: $fontSize
+        }
+
+        input {
+          font-size: $fontSize
+        }
+
+        .ant-select {
+          font-size: $fontSize
+        }
+      }
+
+      &-calendar {
+        &-range {
+          &-picker {
+            &-input {
+              width: 40%;
+            }
+          }
+        }
+      }
+    }
+
+    .ant-form-inline .ant-form-item {
+      margin-bottom: 0 !important;
+    }
+  }
+
+  &-btn {
+    position: absolute;
+    right: 0;
+    top: 0;
+
+    button {
+      display: block;
+      width: 75px;
+      margin: 5px 3px;
+    }
+
+    &__cancel {
+      margin-top: 5px !important;
+    }
+  }
+}

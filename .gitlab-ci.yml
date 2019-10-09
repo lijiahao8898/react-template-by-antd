@@ -1,0 +1,171 @@
+image: harbor.showcode.info/library/auto_ci:latest
+
+#docker registry 的账户需要配置到git repo中，以secret形式存储。
+variables:
+  KUBERNETES_VERSION: 1.10.0
+  CI_REGISTRY: harbor.showcode.info
+  CI_REGISTRY_USER: jenkins
+  CI_REGISTRY_PASSWORD: JYC_vm@919
+  INGRESS_DOMAIN: showcode.info
+#APPLICATION_TYPE根据项目修改默认tomcat,可选值：nodejs,nginx,tomcat
+  APPLICATION_TYPE: nginx
+
+stages:
+  - build
+  - deploy
+  - cleanup
+  - code_review
+  - test
+
+.code_review:
+  stage: code_review
+  allow_failure: true
+  script:
+    - sonar_scan
+  only:
+    - master
+
+sonarqube_review_job:
+  stage: code_review
+  allow_failure: true
+  only:
+    - /^feature\/*/
+    - /^issue\/*/
+  script:
+    - git checkout origin/master
+    - git merge $CI_COMMIT_SHA --no-commit --no-ff
+    - sonar_scan
+
+build:
+  stage: build
+  script:
+    - setup_docker
+    - build_dist
+    - build_docker
+  only:
+    - dev
+    - hotfix
+    - gray
+    - master
+
+deploy:
+  stage: deploy
+  script:
+    - deploy
+  environment:
+    name: $CI_COMMIT_REF_NAME
+    url: http://$CI_PROJECT_NAME-$CI_BUILD_REF_NAME.$INGRESS_DOMAIN
+  only:
+    - dev
+    - hotfix
+    - master
+
+set_dns:
+  stage: deploy
+  script:
+    - update_dns
+  only:
+    - dev
+    - hotfix
+    - master
+  when: manual
+  
+manual_clean:
+  stage: cleanup
+  script:
+    - clean_deploy
+  when: manual
+
+.auto_devops: &auto_devops |
+  # Auto DevOps variables and functions
+
+  INGRESS_URL="$CI_PROJECT_NAME-$CI_BUILD_REF_NAME.$INGRESS_DOMAIN"
+  DEPLOY_NAME="$CI_PROJECT_NAME-$CI_BUILD_REF_NAME"
+
+  SERVICE_PORT=80
+  replicas=1
+
+  function sonar_scan() {
+    sonar-scanner -Dsonar.sourceEncoding=UTF-8 -Dsonar.host.url=http://sonar.showcode.info -Dsonar.login=f017141d02e72c4d02f83f3d814983dfbe02d2d7   -Dsonar.gitlab.project_id=$CI_PROJECT_ID -Dsonar.gitlab.commit_sha=$CI_COMMIT_SHA -Dsonar.gitlab.ref_name=$CI_COMMIT_REF_NAME -Dsonar.projectKey=$CI_PROJECT_NAME -Dsonar.sources=. -Dsun.jnu.encoding=UTF-8 -Dfile.encoding=UTF-8
+  }
+
+  function update_dns() {
+    echo "添加DNS"
+    echo $INGRESS_URL"  TTL 60,CNAME===>  "$INGRESS_DOMAIN
+    nsupdate << EOF
+  server 172.20.20.66
+  update delete $INGRESS_URL CNAME
+  update add $INGRESS_URL 60 IN CNAME $INGRESS_DOMAIN
+  send
+  quit
+  EOF
+  }
+
+  function clean_dns() {
+    echo "清理DNS"
+    echo $INGRESS_URL"  CNAME===>  "$INGRESS_DOMAIN
+    nsupdate << EOF
+  server 172.20.20.66
+  update delete $INGRESS_URL CNAME
+  send
+  quit
+  EOF
+  }
+  function clean_deploy() {
+    #清理部署
+    helm delete --purge \
+      --tiller-namespace gitlab-apps \
+      $DEPLOY_NAME
+  }
+
+  function build_dist() {
+    echo "Install modules"
+    npm install --sass-binary-site=https://npm.taobao.org/mirrors/node-sass/
+    npm run build
+  }
+
+  function build_docker() {
+    #前端项目需要清理.git目录，以减少docker镜像体积。
+    echo "清理.git目录"
+    rm -rf .git
+    echo "$CI_REGISTRY/jyc-test/$CI_PROJECT_NAME:$CI_COMMIT_SHA"
+    docker build --no-cache -t "$CI_REGISTRY/jyc-test/$CI_PROJECT_NAME:$CI_COMMIT_SHA" .
+    docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" "$CI_REGISTRY"
+    docker push "$CI_REGISTRY/jyc-test/$CI_PROJECT_NAME:$CI_COMMIT_SHA"
+  }
+
+  function setup_docker() {
+    if ! docker info &>/dev/null; then
+      if [ -z "$DOCKER_HOST" -a "$KUBERNETES_PORT" ]; then
+        export DOCKER_HOST='tcp://localhost:2375'
+      fi
+    fi
+  }
+  function deploy() {
+    #replicas设置为2保障更新过程中服务不间断，Deployment中已定义部署方式为rollingup
+    KUBE_NAMESPACE="gitlab-apps"
+    CI_APPLICATION_REPOSITORY="$CI_REGISTRY/jyc-test/$CI_PROJECT_NAME"
+    CI_APPLICATION_TAG="$CI_COMMIT_SHA"
+    echo "添加私有chart repo"
+    helm repo add jyc https://harbor.showcode.info/chartrepo/library
+    helm repo remove stable
+    helm repo update
+    echo "开始部署。"
+    helm upgrade -i \
+      --wait \
+      --set image.repository="$CI_APPLICATION_REPOSITORY" \
+      --set image.tag="$CI_APPLICATION_TAG" \
+      --set image.pullPolicy=IfNotPresent \
+      --set replicaCount="$replicas" \
+      --set ingress.enabled=true \
+      --set ingress.host=$INGRESS_URL \
+      --set api.host=plms-service-$CI_BUILD_REF_NAME-tomcat \
+      --namespace="$KUBE_NAMESPACE" \
+      --tiller-namespace gitlab-apps \
+      $DEPLOY_NAME \
+      --version 0.1.0 \
+      jyc/$APPLICATION_TYPE
+  }
+  
+before_script:
+  - *auto_devops
